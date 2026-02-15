@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+
+<StackPane xmlns="http://javafx.com/javafx/17"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="Controller.AfficherUser"
+           style="-fx-background-color: linear-gradient(to bottom right, #667eea 0%, #764ba2 100%);">
+
+    <!-- Conteneur principal -->
+    <VBox spacing="0" alignment="CENTER" maxWidth="1000" maxHeight="700"
+          style="-fx-background-color: white;
+                 -fx-background-radius: 20px;
+                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 20, 0, 0, 5);">
+
+        <!-- En-tête -->
+        <VBox alignment="CENTER" spacing="10"
+              style="-fx-background-color: linear-gradient(to right, #667eea, #764ba2);
+                     -fx-background-radius: 20 20 0 0;
+                     -fx-padding: 25 20 25 20;">
+
+            <Label text="📊" style="-fx-font-size: 42px;"/>
+
+            <Label text="Liste des Utilisateurs"
+                   style="-fx-font-size: 26px;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: white;"/>
+
+            <Label fx:id="countLabel"
+                   text="0 utilisateur(s)"
+                   style="-fx-font-size: 13px;
+                          -fx-text-fill: rgba(255,255,255,0.9);"/>
+        </VBox>
+
+        <!-- Zone de recherche et actions -->
+        <VBox spacing="20" alignment="CENTER">
+            <padding>
+                <Insets top="25" right="30" bottom="10" left="30"/>
+            </padding>
+
+            <!-- Barre de recherche -->
+            <HBox spacing="15" alignment="CENTER">
+                <Label text="🔍" style="-fx-font-size: 20px;"/>
+
+                <TextField fx:id="searchField"
+                           promptText="Rechercher par nom, email ou rôle..."
+                           style="-fx-pref-width: 500px;
+                                  -fx-pref-height: 40px;
+                                  -fx-background-color: #f8f9fa;
+                                  -fx-background-radius: 20px;
+                                  -fx-border-color: #667eea;
+                                  -fx-border-width: 2px;
+                                  -fx-border-radius: 20px;
+                                  -fx-font-size: 14px;
+                                  -fx-padding: 10 20 10 20;"/>
+            </HBox>
+
+            <!-- TableView -->
+            <TableView fx:id="userTable"
+                       prefWidth="920"
+                       prefHeight="400"
+                       style="-fx-background-color: transparent;
+                              -fx-background-radius: 10px;
+                              -fx-border-color: #e0e0e0;
+                              -fx-border-width: 1px;
+                              -fx-border-radius: 10px;">
+
+                <columns>
+                    <TableColumn fx:id="colId"
+                                 text="ID"
+                                 prefWidth="60"
+                                 style="-fx-alignment: CENTER;"/>
+
+                    <TableColumn fx:id="colNom"
+                                 text="👤 Nom"
+                                 prefWidth="180"/>
+
+                    <TableColumn fx:id="colEmail"
+                                 text="📧 Email"
+                                 prefWidth="220"/>
+
+                    <TableColumn fx:id="colMotDePasse"
+                                 text="🔒 Mot de passe"
+                                 prefWidth="200"/>
+
+                    <TableColumn fx:id="colRole"
+                                 text="⭐ Rôle"
+                                 prefWidth="180"
+                                 style="-fx-alignment: CENTER;"/>
+                </columns>
+
+                <placeholder>
+                    <VBox alignment="CENTER" spacing="10">
+                        <Label text="📭" style="-fx-font-size: 48px;"/>
+                        <Label text="Aucun utilisateur trouvé"
+                               style="-fx-font-size: 16px;
+                                      -fx-text-fill: #999;"/>
+                    </VBox>
+                </placeholder>
+            </TableView>
+
+            <!-- Boutons d'action -->
+            <HBox spacing="15" alignment="CENTER">
+                <padding>
+                    <Insets top="10" bottom="20"/>
+                </padding>
+
+                <Button text="◀ Retour"
+                        onAction="#handleBack"
+                        style="-fx-background-color: #95a5a6;
+                               -fx-text-fill: white;
+                               -fx-font-weight: bold;
+                               -fx-font-size: 13px;
+                               -fx-padding: 12 30 12 30;
+                               -fx-background-radius: 25px;
+                               -fx-cursor: hand;
+                               -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0, 0, 2);">
+                    <font>
+                        <Font name="System Bold" size="13"/>
+                    </font>
+                </Button>
+
+                <Button text="✏️ Modifier"
+                        onAction="#handleModify"
+                        style="-fx-background-color: linear-gradient(to right, #f093fb, #f5576c);
+                               -fx-text-fill: white;
+                               -fx-font-weight: bold;
+                               -fx-font-size: 13px;
+                               -fx-padding: 12 30 12 30;
+                               -fx-background-radius: 25px;
+                               -fx-cursor: hand;
+                               -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0, 0, 2);">
+                    <font>
+                        <Font name="System Bold" size="13"/>
+                    </font>
+                </Button>
+
+                <Button text="🔄 Rafraîchir"
+                        onAction="#handleRefresh"
+                        style="-fx-background-color: linear-gradient(to right, #667eea, #764ba2);
+                               -fx-text-fill: white;
+                               -fx-font-weight: bold;
+                               -fx-font-size: 13px;
+                               -fx-padding: 12 30 12 30;
+                               -fx-background-radius: 25px;
+                               -fx-cursor: hand;
+                               -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0, 0, 2);">
+                    <font>
+                        <Font name="System Bold" size="13"/>
+                    </font>
+                </Button>
+
+                <Button text="🗑️ Supprimer"
+                        onAction="#handleDelete"
+                        style="-fx-background-color: linear-gradient(to right, #eb3349, #f45c43);
+                               -fx-text-fill: white;
+                               -fx-font-weight: bold;
+                               -fx-font-size: 13px;
+                               -fx-padding: 12 30 12 30;
+                               -fx-background-radius: 25px;
+                               -fx-cursor: hand;
+                               -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0, 0, 2);">
+                    <font>
+                        <Font name="System Bold" size="13"/>
+                    </font>
+                </Button>
+            </HBox>
+
+        </VBox>
+
+    </VBox>
+
+</StackPane>
