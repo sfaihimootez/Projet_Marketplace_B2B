@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+
+<StackPane xmlns="http://javafx.com/javafx/21"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="Controller.AjouterUser"
+           style="-fx-background-color: linear-gradient(to bottom right, #667eea 0%, #764ba2 100%);">
+
+    <!-- Carte principale -->
+    <VBox alignment="CENTER" spacing="0" maxWidth="500" maxHeight="700"
+          style="-fx-background-color: white;
+                 -fx-background-radius: 20px;
+                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 20, 0, 0, 5);">
+
+        <!-- En-tête avec icône -->
+        <VBox alignment="CENTER" spacing="10"
+              style="-fx-background-color: linear-gradient(to right, #667eea, #764ba2);
+                     -fx-background-radius: 20 20 0 0;
+                     -fx-padding: 30 20 30 20;">
+
+            <Label text="👤" style="-fx-font-size: 48px;"/>
+
+            <Label text="Ajouter un Utilisateur"
+                   style="-fx-font-size: 26px;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: white;"/>
+
+            <Label text="Remplissez les informations ci-dessous"
+                   style="-fx-font-size: 13px;
+                          -fx-text-fill: rgba(255,255,255,0.9);"/>
+        </VBox>
+
+        <!-- Formulaire -->
+        <VBox spacing="20" alignment="CENTER">
+            <padding>
+                <Insets top="30" right="40" bottom="30" left="40"/>
+            </padding>
+
+            <!-- Champ Nom -->
+            <VBox spacing="8">
+                <Label text="Nom complet"
+                       style="-fx-font-weight: bold;
+                              -fx-font-size: 13px;
+                              -fx-text-fill: #555;">
+                    <graphic>
+                        <Label text="👤" style="-fx-font-size: 14px;"/>
+                    </graphic>
+                </Label>
+                <TextField fx:id="nameField"
+                           promptText="Ex: Ahmed Ben Ali"
+                           style="-fx-pref-width: 400px;
+                                  -fx-pref-height: 45px;
+                                  -fx-background-color: #f8f9fa;
+                                  -fx-background-radius: 8px;
+                                  -fx-border-color: transparent;
+                                  -fx-border-radius: 8px;
+                                  -fx-font-size: 14px;
+                                  -fx-padding: 10;
+                                  -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);"/>
+            </VBox>
+
+            <!-- Champ Email -->
+            <VBox spacing="8">
+                <Label text="Adresse email"
+                       style="-fx-font-weight: bold;
+                              -fx-font-size: 13px;
+                              -fx-text-fill: #555;">
+                    <graphic>
+                        <Label text="📧" style="-fx-font-size: 14px;"/>
+                    </graphic>
+                </Label>
+                <TextField fx:id="emailField"
+                           promptText="Ex: ahmed@example.com"
+                           style="-fx-pref-width: 400px;
+                                  -fx-pref-height: 45px;
+                                  -fx-background-color: #f8f9fa;
+                                  -fx-background-radius: 8px;
+                                  -fx-border-color: transparent;
+                                  -fx-border-radius: 8px;
+                                  -fx-font-size: 14px;
+                                  -fx-padding: 10;
+                                  -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);"/>
+            </VBox>
+
+            <!-- Champ Mot de passe avec bouton voir/cacher -->
+            <VBox spacing="8">
+                <Label text="Mot de passe"
+                       style="-fx-font-weight: bold;
+                              -fx-font-size: 13px;
+                              -fx-text-fill: #555;">
+                    <graphic>
+                        <Label text="🔒" style="-fx-font-size: 14px;"/>
+                    </graphic>
+                </Label>
+                <StackPane>
+                    <PasswordField fx:id="passwordField"
+                                   promptText="Minimum 6 caractères"
+                                   style="-fx-pref-width: 400px;
+                                          -fx-pref-height: 45px;
+                                          -fx-background-color: #f8f9fa;
+                                          -fx-background-radius: 8px;
+                                          -fx-border-color: transparent;
+                                          -fx-border-radius: 8px;
+                                          -fx-font-size: 14px;
+                                          -fx-padding: 10 50 10 10;
+                                          -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);"/>
+
+                    <TextField fx:id="visiblePasswordField"
+                               promptText="Minimum 6 caractères"
+                               visible="false"
+                               managed="false"
+                               style="-fx-pref-width: 400px;
+                                      -fx-pref-height: 45px;
+                                      -fx-background-color: #f8f9fa;
+                                      -fx-background-radius: 8px;
+                                      -fx-border-color: transparent;
+                                      -fx-border-radius: 8px;
+                                      -fx-font-size: 14px;
+                                      -fx-padding: 10 50 10 10;
+                                      -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);"/>
+
+                    <!-- Bouton pour voir/cacher le mot de passe -->
+                    <Button fx:id="togglePasswordButton"
+                            text="👁️"
+                            onAction="#togglePasswordVisibility"
+                            style="-fx-background-color: transparent;
+                                   -fx-cursor: hand;
+                                   -fx-font-size: 18px;
+                                   -fx-padding: 5 10 5 10;"
+                            StackPane.alignment="CENTER_RIGHT">
+                        <StackPane.margin>
+                            <Insets right="10"/>
+                        </StackPane.margin>
+                    </Button>
+                </StackPane>
+            </VBox>
+
+            <!-- Champ Rôle -->
+            <VBox spacing="8">
+                <Label text="Rôle"
+                       style="-fx-font-weight: bold;
+                              -fx-font-size: 13px;
+                              -fx-text-fill: #555;">
+                    <graphic>
+                        <Label text="⭐" style="-fx-font-size: 14px;"/>
+                    </graphic>
+                </Label>
+                <ChoiceBox fx:id="roleChoice"
+                           style="-fx-pref-width: 400px;
+                                  -fx-pref-height: 45px;
+                                  -fx-background-color: #f8f9fa;
+                                  -fx-background-radius: 8px;
+                                  -fx-font-size: 14px;
+                                  -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);"/>
+            </VBox>
+
+            <!-- Boutons -->
+            <HBox spacing="15" alignment="CENTER">
+                <padding>
+                    <Insets top="20"/>
+                </padding>
+
+                <Button text="✓ Ajouter"
+                        onAction="#handleAddUser"
+                        style="-fx-background-color: linear-gradient(to right, #11998e, #38ef7d);
+                               -fx-text-fill: white;
+                               -fx-font-weight: bold;
+                               -fx-font-size: 14px;
+                               -fx-padding: 12 35 12 35;
+                               -fx-background-radius: 25px;
+                               -fx-cursor: hand;
+                               -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 3);">
+                    <font>
+                        <Font name="System Bold" size="14"/>
+                    </font>
+                </Button>
+
+                <Button text="📋 Voir la liste"
+                        onAction="#handleShowUserList"
+                        style="-fx-background-color: linear-gradient(to right, #667eea, #764ba2);
+                               -fx-text-fill: white;
+                               -fx-font-weight: bold;
+                               -fx-font-size: 14px;
+                               -fx-padding: 12 35 12 35;
+                               -fx-background-radius: 25px;
+                               -fx-cursor: hand;
+                               -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 3);">
+                    <font>
+                        <Font name="System Bold" size="14"/>
+                    </font>
+                </Button>
+            </HBox>
+
+        </VBox>
+
+    </VBox>
+
+</StackPane>
